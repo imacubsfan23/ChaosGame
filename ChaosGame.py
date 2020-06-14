@@ -11,12 +11,6 @@ white = (255,255,255)
 red = (255,0,0)
 black = (0, 0, 0)
 
-all_dots = []
-placed = []
-dots = int(input("How many vertices do you want? "))
-dotcount = dots
-tdistance = 1/(dotcount-1)
-
 class Dot():
     def __init__(self, x, y, color, id=10):
         self.rect = pygame.Rect(3,3,3,3)
@@ -29,27 +23,20 @@ class Dot():
 
 def DrawWindow():
     screen.fill(black)
-def text_objects(text, font):
-    textSurface = font.render(text, True, White)
-    return textSurface, textSurface.get_rect()
-def button(msg,x,y,w,h,ic,ac,action=None):
-    mouse = pygame.mouse.get_pos()
-    click = pygame.mouse.get_pressed()
-    if x+w > mouse[0] > x and y+h > mouse[1] > y:
-        pygame.draw.rect(screen, ac,(x,y,w,h))
-        if click[0] == 1 and action != None:
-            action()
-    else:
-        pygame.draw.rect(screen, ic,(x,y,w,h))
 
-    smallText = pygame.font.Font('game_font.ttf',20)
-    textSurf, textRect = text_objects(msg, smallText)
-    textRect.center = ( (x+(w/2)), (y+(h/2)) )
-    screen.blit(textSurf, textRect)
+def getVertices():
+    return int(input("How many vertices do you want? "))
+
 def quit():
     pygame.quit()
     sys.exit()
     wait()
+
+all_dots = []
+placed = []
+dots = getVertices()
+dotcount = dots
+tdistance = 1/(dotcount-1)
 
 for dot in range(dots):
     print("{} {} left to place.".format(dots, 'vertices' if dots>1 else 'vertex'))
