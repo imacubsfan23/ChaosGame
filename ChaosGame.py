@@ -13,8 +13,8 @@ green = (0,255,0)
 black = (0, 0, 0)
 
 class Dot():
-    def __init__(self, x, y, color):
-        self.rect = pygame.Rect(3,3,3,3)
+    def __init__(self, x, y, color, size=1):
+        self.rect = pygame.Rect(size, size, size, size)
         self.rect.x = int(x)
         self.rect.y = int(y)
         self.color = color
@@ -44,7 +44,7 @@ for vertex in range(num_of_vertices):
         event = pygame.event.wait()
         if event.type == pygame.QUIT: quit()
         if event.type == pygame.MOUSEBUTTONDOWN:
-            v = Dot(event.pos[0], event.pos[1], red)
+            v = Dot(event.pos[0], event.pos[1], red, 3)
             vertices.append(v)
             pygame.draw.rect(screen, v.color, v.rect)
             num_of_vertices -= 1
