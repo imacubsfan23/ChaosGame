@@ -4,7 +4,7 @@ pygame.display.set_caption('Chaos Game')
 __author__ = 'Tim Dickeson II'
 
 clock = pygame.time.Clock()
-size = width, height = 600, 600
+size = width, height = 1000, 1000
 screen = pygame.display.set_mode(size)
 
 white = (255,255,255)
@@ -24,15 +24,14 @@ def DrawWindow():
 
 def getNumOfVertices():
     v = int(input("How many vertices do you want? "))
-    return v if v > 2 else getNumOfVertices()
+    return v if int(v) > 2 else getNumOfVertices()
 
 def quit():
     pygame.quit()
     sys.exit()
     wait()
 
-const_num_of_vertices = getNumOfVertices()
-num_of_vertices = const_num_of_vertices
+num_of_vertices = getNumOfVertices()
 vertices = []
 generated_dots = []
 DrawWindow()
@@ -65,21 +64,19 @@ while not startpoint_placed:
         startpoint_placed = True
 pygame.display.flip()
 
-running = True
 lastpos = [startpoint.rect.x, startpoint.rect.y]
+vval = len(vertices)-1 #useful vertices number
+running = True
 while running:
     for e in pygame.event.get():
         if e.type == pygame.QUIT:
             running = False
 
-    random_vertex = vertices[random.randint(0, const_num_of_vertices-1)]
-    x = (random_vertex.rect.x + lastpos[0])/(const_num_of_vertices-1)
-    y = (random_vertex.rect.y + lastpos[1])/(const_num_of_vertices-1)
-    lastpos[0] = x
-    lastpos[1] = y
+    random_vertex = vertices[random.randint(0, vval)]
+    x = (random_vertex.rect.x + lastpos[0])/2
+    y = (random_vertex.rect.y + lastpos[1])/2
+    lastpos = (x,y)
     dot = Dot(x, y, white)
     pygame.draw.rect(screen, dot.color, dot.rect)
-    #print("x:{}, y:{}".format(x,y))
-    #pygame.time.delay(1000)
 
     pygame.display.flip()
